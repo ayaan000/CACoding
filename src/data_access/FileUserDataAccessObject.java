@@ -8,9 +8,7 @@ import use_case.signup.SignupUserDataAccessInterface;
 
 import java.io.*;
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 public class FileUserDataAccessObject implements SignupUserDataAccessInterface, LoginUserDataAccessInterface,
         ClearUserDataAccessInterface {
@@ -87,11 +85,13 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
         }
     }
 
-    public void clear() {
+    public List<String> clear() {
+        Set<String> deleted_users = accounts.keySet();
+        List<String> copy_deleted = new ArrayList<>(deleted_users); //making copy to prevent aliasing
         accounts.clear();
-        headers.clear();
         this.save();
 
+        return copy_deleted;
     }
 
 

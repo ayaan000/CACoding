@@ -2,18 +2,16 @@ package use_case.clear_users;
 
 // TODO Complete me
 
+import java.util.List;
+
 public class ClearOutputData {
-    private final String message;
+    private final List<String> deleted_users;
 
-    private String clearTime;
 
-    public ClearOutputData(String message, String clearTime){
-        this.message = message;
-        this.clearTime = clearTime;
+    public ClearOutputData(List<String> deleted_users){
+        this.deleted_users = deleted_users;
 
     }
 
-    public String getClearTime(){ return clearTime; }
-
-    public String getMessage() { return message; }
+    public List<String> deleted_users(){ return deleted_users;}
 }

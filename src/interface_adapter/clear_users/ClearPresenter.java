@@ -5,13 +5,12 @@ package interface_adapter.clear_users;
 import interface_adapter.ViewManagerModel;
 import use_case.clear_users.ClearOutputBoundary;
 import use_case.clear_users.ClearOutputData;
-import view.ViewManager;
 
-import java.time.LocalDateTime;
+import java.util.List;
 
 public class ClearPresenter implements ClearOutputBoundary {
     private final ClearViewModel clearViewModel;
-    private ViewManagerModel viewManagerModel;
+    private final ViewManagerModel viewManagerModel;
 
     public ClearPresenter(ViewManagerModel viewManagerModel,
                           ClearViewModel clearViewModel) {
@@ -20,9 +19,14 @@ public class ClearPresenter implements ClearOutputBoundary {
     }
 
     public void prepareSuccessView(ClearOutputData response){
-        LocalDateTime responseTime = LocalDateTime.parse(response.getClearTime());
+        List<String> deleted_users = response.deleted_users();
         ClearState clearState = clearViewModel.getState();
-        clearState.
+        clearState.deleted_users = deleted_users;
+        clearViewModel.setState(clearState);
+        clearViewModel.firePropertyChanged();
+
+        viewManagerModel.setActiveView(clearViewModel.getViewName());
+        viewManagerModel.firePropertyChanged();
 
     }
 }

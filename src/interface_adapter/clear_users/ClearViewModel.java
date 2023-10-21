@@ -8,7 +8,6 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
 public class ClearViewModel extends ViewModel {
-    public static final String MESSAGE = "All user data has been cleared";
 
     private ClearState state = new ClearState();
 
